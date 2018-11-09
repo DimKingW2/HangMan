@@ -26,7 +26,7 @@ public class HangMan {
             System.out.println("Player 2, guess a letter.");
             letterGuessed = input.next().toLowerCase();
             char letterGuessedChar = letterGuessed.charAt(0);
-            if (isLetterRight(letterGuessedChar)) {
+            if (isLetterRight(letterGuessedChar, currentGuessPhrase)) {
                 System.out.println("Right!");
 
             } else {
@@ -50,13 +50,17 @@ public class HangMan {
 
 
     }
-    private static boolean isLetterRight(char letterGuessed){
+    private static boolean isLetterRight(char letterGuessed, String currentGuessPhrase){
+        if(currentGuessPhrase.contains(String.valueOf(letterGuessed))){
+            return false;
+        }
         for(int i=0;i<secretWord.length();i++) {
             if (secretWord.charAt(i) == letterGuessed) {
                 return true;
             }
         }
                 return(false);
+
 
     }
     private static String setSecretWord(String secretWord) {
