@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
+
 public class HangMan {
 
     private static String secretWord;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner input;
-        //String secretWord;
         String letterGuessed;
-        //String answer;
+        String answer;
         String currentGuessPhrase;
 
 
@@ -17,38 +17,101 @@ public class HangMan {
 
 
 
-        System.out.println("Welcome to hangman. Player 1 enter a word, player 2 be ready to guess.");
-        secretWord = input.next().toLowerCase();
-        currentGuessPhrase = setSecretWord(secretWord);
-
 
         do {
-            System.out.println("Player 2, guess a letter.");
-            letterGuessed = input.next().toLowerCase();
-            char letterGuessedChar = letterGuessed.charAt(0);
-            if (isLetterRight(letterGuessedChar, currentGuessPhrase)) {
-                System.out.println("Right!");
+            System.out.println("Hangman is a game where one person enters a word and another will guess the word.\n" +
+                    "Player one will choose a word first, then player two will guess letters. For this game\n" +
+                    "the winner will get a point. If you enter the word, you win if they don't guess it.\n" +
+                    "If you don't enter the word, you win by guessing it. The first to win 3 games, wins Hangman.");
+            int score1 = 0;
+            int score2 = 0;
+            int whoGoes = 0;
+            while ((score1 < 3) || (score2 < 3)) {
+                if(whoGoes % 2 == 0){
+                    System.out.println("Player 1 enter a word, player 2 be ready to guess. (Only a Single Word.)");
+                } else {
+                    System.out.println("Player 2 enter a word, player 1 be ready to guess. (Only a Single Word.)");
+                }
+                secretWord = input.next().toLowerCase();
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
+                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");//the most advanced anti cheat software
+                currentGuessPhrase = setSecretWord(secretWord);
+                if(secretWord.length() <= 3){
+                    System.out.println("This word is easy");
+                }
+                else if(secretWord.length() <= 6){
+                    System.out.println("This word is average");
+                }
+                else if(secretWord.length() <= 9){
+                    System.out.println("This word is hard");
+                }
+                else{
+                    System.out.println("Good Luck guessing this one.");
+                }
 
-            } else {
-                System.out.println("Wrong");
-                guesses--;
+
+                do {
+                    System.out.println("Guess a letter.");
+                    letterGuessed = input.next().toLowerCase();
+                    char letterGuessedChar = letterGuessed.charAt(0);
+                    if (isLetterRight(letterGuessedChar, currentGuessPhrase)) {
+                        System.out.println("Right!");
+
+                    } else {
+                        System.out.println("Wrong");
+                        guesses--;
+
+                    }
+
+                    currentGuessPhrase = showLettersGuessed(letterGuessedChar, secretWord, currentGuessPhrase);
+                    System.out.println(currentGuessPhrase);
+                    System.out.println(drawManHanging(guesses));
+                    System.out.println("You have " + guesses + " guesses left.");
+                    if (currentGuessPhrase.equals(secretWord)) {
+                        break;
+                    }
+
+                } while (guesses != 0);
+                if(whoGoes % 2 == 0){
+                    if (!currentGuessPhrase.equals(secretWord)) {
+                        System.out.println("Player 1 wins!");
+                        score1 += 1;
+                    } else {
+                        System.out.println("Player 2 wins!");
+                        score2 += 1;
+                    }
+                }
+                else {
+                    if (!currentGuessPhrase.equals(secretWord)) {
+                        System.out.println("Player 2 wins!");
+                        score2 += 1;
+                    } else {
+                        System.out.println("Player 1 wins!");
+                        score1 += 1;
+                    }
+                }
+                whoGoes ++;
+                System.out.println("The score is " + score1 + " to " + score2 + " .(Player 1 : Player 2)");
+                if(score1 == 3) {
+                    System.out.println("Player 1 Won The Game!");
+                    break;
+                }
+                if(score2 == 3){
+                    System.out.println("Player 2 Won The Game!");
+                    break;
+                }
 
             }
-
-            currentGuessPhrase = showLettersGuessed(letterGuessedChar, secretWord,currentGuessPhrase);
-            System.out.println(currentGuessPhrase);
-            System.out.println(drawManHanging(guesses));
-            System.out.println("You have " + guesses + " guesses left.");
-
-        }while(guesses != 0);
-        System.out.println("To Bad");
-        input.close();
-        System.exit(0);
-        //System.out.println("Would you like to play again? (Please only type yes or no)");
-        //answer = input.nextLine().toLowerCase();
+            System.out.println("Would you like to play again? (Please only type y or n)");
+            answer = input.next().toLowerCase();
 
 
-
+        }while(answer.equals("y"));
+        if(!answer.equals("y")){
+            System.out.println("Ok then...");
+            input.close();
+            System.exit(0);
+        }
     }
     private static boolean isLetterRight(char letterGuessed, String currentGuessPhrase){
         if(currentGuessPhrase.contains(String.valueOf(letterGuessed))){
