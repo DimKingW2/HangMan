@@ -26,33 +26,36 @@ public class HangMan {
             int score1 = 0;
             int score2 = 0;
             int whoGoes = 0;
+            //String singleMulti;
             while ((score1 < 3) || (score2 < 3)) {
                 if(whoGoes % 2 == 0){
-                    System.out.println("Player 1 enter a word, player 2 be ready to guess. (Only a Single Word.)");
+                    System.out.println("Player 1 enter a word or phrase, player 2 be ready to guess.");
                 } else {
-                    System.out.println("Player 2 enter a word, player 1 be ready to guess. (Only a Single Word.)");
+                    System.out.println("Player 2 enter a word or phrase, player 1 be ready to guess.");
                 }
-                secretWord = input.next().toLowerCase();
+                secretWord = input.nextLine().toLowerCase();
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
-                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");//the most advanced anti cheat software
+                            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");//the most advanced anti cheat software
                 currentGuessPhrase = setSecretWord(secretWord);
-                if(secretWord.length() <= 3){
-                    System.out.println("This word is easy");
-                }
-                else if(secretWord.length() <= 6){
-                    System.out.println("This word is average");
-                }
-                else if(secretWord.length() <= 9){
-                    System.out.println("This word is hard");
-                }
-                else{
-                    System.out.println("Good Luck guessing this one.");
+                if (secretWord.length() <= 5) {
+                        System.out.println("This is a easy word/phrase");
+                } else if (secretWord.length() <= 10) {
+                        System.out.println("This is a average word/phrase");
+                } else if (secretWord.length() <= 15) {
+                        System.out.println("This is a hard word/phrase");
+                } else {
+                        System.out.println("Good Luck guessing this one.");
+
                 }
 
 
                 do {
                     System.out.println("Guess a letter.");
-                    letterGuessed = input.next().toLowerCase();
+                    letterGuessed = input.nextLine().toLowerCase();
+                    while(letterGuessed.length() > 1){
+                        System.out.println("A letter, not letters...");
+                        letterGuessed=input.nextLine().toLowerCase();
+                    }
                     char letterGuessedChar = letterGuessed.charAt(0);
                     if (isLetterRight(letterGuessedChar, currentGuessPhrase)) {
                         System.out.println("Right!");
@@ -117,6 +120,9 @@ public class HangMan {
         if(currentGuessPhrase.contains(String.valueOf(letterGuessed))){
             return false;
         }
+        if((String.valueOf(letterGuessed).length() >= 2)){
+            return false;
+        }
         for(int i=0;i<secretWord.length();i++) {
             if (secretWord.charAt(i) == letterGuessed) {
                 return true;
@@ -128,11 +134,10 @@ public class HangMan {
     }
     private static String setSecretWord(String secretWord) {
         String hiddenWord = "";
-        String guessedLetters = "";
         for(int i=0;i<secretWord.length();i++) {
-            hiddenWord = secretWord.replaceAll("[^" + guessedLetters + "^]", "_");
+            hiddenWord = secretWord.replaceAll("\\S", "-");
+            }
 
-        }
         return  hiddenWord;
     }
 
