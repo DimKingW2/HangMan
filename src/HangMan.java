@@ -28,6 +28,7 @@ public class HangMan {
             int score2 = 0;
             int whoGoes = 0;
             //String singleMulti;
+            //start multi player coding
             while ((score1 < 3) || (score2 < 3)) {
                 if(whoGoes % 2 == 0){
                     System.out.println("Player 1 enter a word or phrase, player 2 be ready to guess.");
