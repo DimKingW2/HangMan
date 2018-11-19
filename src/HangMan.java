@@ -18,6 +18,7 @@ public class HangMan {
 
 
 
+
         do {
             System.out.println("Hangman is a game where one person enters a word and another will guess the word.\n" +
                     "Player one will choose a word first, then player two will guess letters. For this game\n" +
@@ -35,16 +36,16 @@ public class HangMan {
                 }
                 secretWord = input.nextLine().toLowerCase();
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
-                            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");//the most advanced anti cheat software
+                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");//the most advanced anti cheat software
                 currentGuessPhrase = setSecretWord(secretWord);
                 if (secretWord.length() <= 5) {
-                        System.out.println("This is a easy word/phrase");
+                    System.out.println("This is a easy word/phrase");
                 } else if (secretWord.length() <= 10) {
-                        System.out.println("This is a average word/phrase");
+                    System.out.println("This is a average word/phrase");
                 } else if (secretWord.length() <= 15) {
-                        System.out.println("This is a hard word/phrase");
+                    System.out.println("This is a hard word/phrase");
                 } else {
-                        System.out.println("Good Luck guessing this one.");
+                    System.out.println("Good Luck guessing this one.");
 
                 }
 
@@ -74,7 +75,8 @@ public class HangMan {
                         break;
                     }
 
-                } while (guesses != 0);
+                }
+                while (guesses != 0);
                 if(whoGoes % 2 == 0){
                     if (!currentGuessPhrase.equals(secretWord)) {
                         System.out.println("Player 1 wins!");
@@ -92,6 +94,9 @@ public class HangMan {
                         System.out.println("Player 1 wins!");
                         score1 += 1;
                     }
+                }
+                while (guesses != 15){
+                    guesses ++;
                 }
                 whoGoes ++;
                 System.out.println("The score is " + score1 + " to " + score2 + " .(Player 1 : Player 2)");
@@ -128,7 +133,7 @@ public class HangMan {
                 return true;
             }
         }
-                return(false);
+        return(false);
 
 
     }
@@ -136,7 +141,7 @@ public class HangMan {
         String hiddenWord = "";
         for(int i=0;i<secretWord.length();i++) {
             hiddenWord = secretWord.replaceAll("\\S", "-");
-            }
+        }
 
         return  hiddenWord;
     }
