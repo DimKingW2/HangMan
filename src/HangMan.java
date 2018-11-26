@@ -41,7 +41,7 @@ public class HangMan {
                 currentGuessPhrase = setSecretWord(secretWord);
                 if (secretWord.length() <= 5) {
                     System.out.println("This is a easy word/phrase");
-                } else if (secretWord.length() <= 10) {
+                } else if (secretWord.length() <= 100) {
                     System.out.println("This is a average word/phrase");
                 } else if (secretWord.length() <= 15) {
                     System.out.println("This is a hard word/phrase");
