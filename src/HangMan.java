@@ -112,7 +112,7 @@ public class HangMan {
 
             }
             System.out.println("Would you like to play again? (Please only type y or n)");
-            answer = input.next().toLowerCase();
+            answer = input.nextLine().toLowerCase();
 
 
         }while(answer.equals("y"));
