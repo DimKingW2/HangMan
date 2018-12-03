@@ -11,13 +11,10 @@ public class HangMan {
         String letterGuessed;
         String answer;
         String currentGuessPhrase;
-
-
-        input = new Scanner(System.in);
         int guesses = 15;
-        int whoGoes = 0;
         int score1 = 0;
         int score2 = 0;
+        input = new Scanner(System.in);
 
 
         do {
@@ -60,7 +57,7 @@ public class HangMan {
                     System.out.println("Good Luck guessing this one.");
                 }
                 currentGuessPhrase = setSecretWord(secretWord);
-                do {
+                do{
                     System.out.println("Guess a letter.");
                     letterGuessed = input.next().toLowerCase();
                     while (letterGuessed.length() > 1) {
@@ -86,17 +83,21 @@ public class HangMan {
                         break;
                     }
                 }while (guesses != 0);
+                while(guesses != 15){
+                    guesses++;
+                }
                 if(!currentGuessPhrase.equals(secretWord)){
                     System.out.println("Nope, the word was " + secretWord + ".");
                 }
 
             }
+            int whoGoes = 0;
             if (s_or_m.equals("m")) {
                 System.out.println("Hangman is a game where one person enters a word and another will guess the word.\n" +
                         "Player one will choose a word first, then player two will guess letters. For this game\n" +
                         "the winner will get a point. If you enter the word, you win if they don't guess it.\n" +
                         "If you don't enter the word, you win by guessing it. The first to win 3 games, wins Hangman.");
-                while((score1 < 3) || (score2 < 3)) {
+                while((score1 < 3) && (score2 < 3)) {
                     if (whoGoes % 2 == 0) {
                         System.out.println("Player 1 enter a word or phrase, player 2 be ready to guess.");
                     } else {
@@ -137,35 +138,45 @@ public class HangMan {
                         System.out.println(currentGuessPhrase);
                         System.out.println(drawManHanging(guesses));
                         System.out.println("You have " + guesses + " guesses left.");
-                        whoGoes ++;
                         if (currentGuessPhrase.equals(secretWord)) {
                             break;
                         }
-                        if(whoGoes % 2 == 0){
-                            if (!currentGuessPhrase.equals(secretWord)) {
-                                System.out.println("Player 1 wins!");
-                                score1 += 1;
-
-                            }
-                            else if(currentGuessPhrase.equals(secretWord)) {
-                                System.out.println("Player 2 wins!");
-                                score2 += 1;
-                            }
-                        } else {
-                            if (!currentGuessPhrase.equals(secretWord)) {
-                                System.out.println("Player 2 wins!");
-                                score2 += 1;
-                            }
-                            else if(currentGuessPhrase.equals(secretWord)) {
-                                System.out.println("Player 1 wins!");
-                                score1 += 1;
-                            }
-                        }
-                        System.out.println("The score is " + score1 + " to " + score2 + ".(player 1: player 2)");
-
                     } while (guesses != 0);
+
+                    while (guesses != 15) {
+                        guesses++;
+                    }
+
+
+                    if (whoGoes % 2 == 0) {
+                        if (!currentGuessPhrase.equals(secretWord)) {
+                            System.out.println("Player 1 wins!");
+                            score1 += 1;
+
+                        } else if (currentGuessPhrase.equals(secretWord)) {
+                            System.out.println("Player 2 wins!");
+                            score2 += 1;
+                        }
+                    } else {
+                        if (!currentGuessPhrase.equals(secretWord)) {
+                            System.out.println("Player 2 wins!");
+                            score2 += 1;
+                        } else if (currentGuessPhrase.equals(secretWord)) {
+                            System.out.println("Player 1 wins!");
+                            score1 += 1;
+                        }
+                    }
+                    System.out.println("The score is " + score1 + " to " + score2 + ".(player 1: player 2)");
+                    whoGoes ++;
+                }
+                if(score1 == 3){
+                    System.out.println("Player 1 wins the game!");
+                }
+                else if(score2 == 3){
+                    System.out.println("Player 2 wins the game!");
                 }
             }
+
 
             System.out.println("Would you like to play again? (Please only type y or n)");
             answer = input.next().toLowerCase();
