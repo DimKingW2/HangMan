@@ -17,7 +17,7 @@ public class HangMan {
         input = new Scanner(System.in);
 
 
-        do {
+        do{
             System.out.println("Would you like to play single player or multi player?(Type S for single player and M for multi player)");
             String s_or_m = input.next().toLowerCase();
             while (!s_or_m.equals("s") && !s_or_m.equals("m")) {
@@ -88,6 +88,15 @@ public class HangMan {
                 }
                 if(!currentGuessPhrase.equals(secretWord)){
                     System.out.println("Nope, the word was " + secretWord + ".");
+                    System.out.println("-------------------------\n" +
+                                        "       |                |\n" +
+                                        "       0                |\n" +
+                                        "      /|\\               |\n" +
+                                        "     / | \\              |\n" +
+                                        "    ; /\\ ;              |\n" +
+                                        "     /  \\               |\n" +
+                                        "   _      _             |\n" +
+                                        "________________________|");
                 }
 
             }
@@ -141,7 +150,10 @@ public class HangMan {
                         if (currentGuessPhrase.equals(secretWord)) {
                             break;
                         }
-                    } while (guesses != 0);
+                    }while (guesses != 0);
+                    if(!currentGuessPhrase.equals(secretWord)){
+                        System.out.println("Nope, the word was " + secretWord + ".");
+                    }
 
                     while (guesses != 15) {
                         guesses++;
