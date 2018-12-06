@@ -188,6 +188,12 @@ public class HangMan {
                     System.out.println("Player 2 wins the game!");
                 }
             }
+            while(score1 != 0){
+                score1--;
+            }
+            while(score2 != 0){
+                score2--;
+            }
 
 
             System.out.println("Would you like to play again? (Please only type y or n)");
